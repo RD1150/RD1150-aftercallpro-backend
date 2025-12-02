@@ -1,22 +1,26 @@
+// server.js
 import express from "express";
-import cors from "cors";
 
 const app = express();
-app.use(cors());
 app.use(express.json());
 
-// HEALTH CHECK for Render
-app.get("/healthz", (req, res) => {
-  res.status(200).send("ok");
-});
+const PORT = process.env.PORT || 3000;
 
-// ROOT TEST
+// --- REQUIRED FOR RENDER ---
+app.get("/healthz", (req, res) => res.status(200).send("ok"));
+
+// --- Simple root (optional) ---
 app.get("/", (req, res) => {
-  res.send("AfterCallPro backend is running");
+  res.json({ ok: true, service: "AfterCallPro backend" });
 });
 
-// Start server
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+// ---- Placeholders you’ll wire later ----
+app.post("/ingest/ghl", (req, res) => {
+  // Expect webhook from GHL or your app
+  // TODO: qualify/route lead, then forward to HubSpot/Salesforce
+  res.json({ received: true });
+});
+
+app.listen(PORT, () => {
+  console.log(`AfterCallPro backend listening on :${PORT}`);
 });
