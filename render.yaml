@@ -1,28 +1,40 @@
 services:
-- type: web
-  name: aftercallpro-backend
-  env: node
-  plan: free
-  region: oregon
-  buildCommand: "npm install"
-  startCommand: "npm start"
-  autoDeploy: true
-  envVars:
-  - key: PORT
-    value: "3000"
-  - key: GHL_API_KEY
-    sync: false
-  - key: GHL_LOCATION_ID
-    sync: false
-  - key: GHL_CALENDAR_LINK
-    sync: false
-  - key: HUBSPOT_TOKEN
-    sync: false
-  - key: SF_INSTANCE_URL
-    sync: false
-  - key: SF_ACCESS_TOKEN
-    sync: false
-  - key: SF_API_VERSION
-    value: "v61.0"
-  - key: SF_OBJECT
-    value: "Lead"
+  - type: web
+    name: aftercallpro-backend
+    env: node
+    plan: free
+    region: oregon
+
+    buildCommand: "npm install"
+    startCommand: "npm start"
+    autoDeploy: true
+
+    healthCheckPath: /healthz
+
+    envVars:
+      - key: PORT
+        value: "3000"
+
+      - key: GHL_API_KEY
+        sync: false
+
+      - key: GHL_LOCATION_ID
+        sync: false
+
+      - key: GHL_CALENDAR_LINK
+        sync: false
+
+      - key: HUBSPOT_TOKEN
+        sync: false
+
+      - key: SF_INSTANCE_URL
+        sync: false
+
+      - key: SF_ACCESS_TOKEN
+        sync: false
+
+      - key: SF_API_VERSION
+        value: "v61.0"
+
+      - key: SF_OBJECT
+        value: "Lead"
